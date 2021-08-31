@@ -34,6 +34,6 @@ Example use:
 
 ```python
 from aws_clients.clients import S3BucketManager
-s3_manager = S3BucketManager(bucket_name="MyBucket", region="us-east-1)
+s3_manager = S3BucketManager(bucket_name="MyBucket", region="us-east-1")
 s3_manager.list_objects()
 ```

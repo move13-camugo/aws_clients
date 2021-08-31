@@ -278,17 +278,19 @@ class S3BucketManager(object):
                 self.download_file(local_filename=local_filename, key_name=obj)
 
 
-    def list_objects(self, prefix='', suffix='', pattern='', **kwargs):
+    def list_objects(self, prefix='', suffix='', pattern='', exclude_folders=False, **kwargs):
         """
         Returns a list of keys in the s3 bucket
         that match the prefix, suffix and glob pattern
         given.
         """
-        objects = list(self.get_list_bucket_objects(prefix, suffix, **kwargs))
+        objects_gen = self.get_list_bucket_objects(prefix, suffix, **kwargs)
+        if exclude_folders:
+            objects_gen = filter(lambda x:not x.endswith("/"), objects_gen)
+        objects = list(objects_gen)
         if pattern:
             return fnmatch.filter(objects, pattern)
         return objects
-
 
     def get_list_bucket_objects(self, prefix='', suffix='', **kwargs):
         """
