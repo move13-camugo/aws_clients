@@ -179,7 +179,7 @@ class S3BucketManager(object):
         return True
 
 
-    def upload_file(self, local_filename, key_name, extra_args={}, storage_class="STANDARD"):
+    def upload_file(self, local_filename, key_name, extra_args={}, storage_class="STANDARD", **kwargs):
         """
         Arguments:
             :extra_args : More arguments to pass to the file upload, 
@@ -194,7 +194,8 @@ class S3BucketManager(object):
 
         self.client.upload_file(
             local_filename, self.bucket_name, key_name,
-            ExtraArgs=extra_args
+            ExtraArgs=extra_args,
+            **kwargs
         )
 
         LOGGER.info("Done !")
