@@ -1,0 +1,28 @@
+[project]
+name = "aws_clients"
+authors = [
+    "Juan Verhook <juanfranciscoverhook@gmail.com>"
+]
+maintainers = [
+    "Juan Verhook <jfverhook@hotmail.com>"
+]
+python = "^3.7"
+description = "API Clients package to make use of the AWS Python SDK to manage AWS Services."
+repository = "https://github.com/move13-camugo/aws_clients"
+
+classifiers = [
+    "Topic :: Software Development",
+]
+
+
+[dependencies]
+boto3="^1.18.25"
+requests="^2.25.0"
+
+[build-system]
+requires = [
+    "setuptools >= 47.1.1",
+    "wheel",
+    "setuptools_scm[toml]>=3.4"
+]
+build-backend = "setuptools.build_meta"
