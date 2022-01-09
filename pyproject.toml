@@ -1,5 +1,5 @@
 [project]
-name = "aws_clients"
+name = "camugo_aws_clients"
 authors = [
     "Juan Verhook <juanfranciscoverhook@gmail.com>"
 ]

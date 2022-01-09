@@ -4,6 +4,7 @@ import os
 import sys
 import threading
 
+
 class ProgressPercentage(object):
     """
     Progress monitor class implementation
@@ -28,12 +29,14 @@ class ProgressPercentage(object):
             self._seen_so_far += bytes_amount
             percentage = (self._seen_so_far / self._size) * 100
             sys.stdout.write(
-                "\r%s  %s / %s  (%.2f%%)" % (
-                    self._filename, self._seen_so_far, self._size,
-                    percentage))
+                "\r%s  %s / %s  (%.2f%%)"
+                % (self._filename, self._seen_so_far, self._size, percentage)
+            )
             sys.stdout.flush()
 
-def get_session_from_json_credentials(file_path:str, organization:str, profile:str="default", region_name:str=None) -> boto3.Session:
+def get_session_from_json_credentials(
+    file_path: str, organization: str, profile: str = "default", region_name: str = None
+) -> boto3.Session:
     """
     Gets the session from boto3 using the credentials stored in a JSON file
 
@@ -85,9 +88,13 @@ def get_session_from_json_credentials(file_path:str, organization:str, profile:s
         credentials = json.load(f)
     try:
         session = boto3.Session(
-            aws_access_key_id=credentials[organization]["credentials"][profile]["key_id"],
-            aws_secret_access_key=credentials[organization]["credentials"][profile]["access_key"],
-            region_name=region_name
+            aws_access_key_id=credentials[organization]["credentials"][profile][
+                "key_id"
+            ],
+            aws_secret_access_key=credentials[organization]["credentials"][profile][
+                "access_key"
+            ],
+            region_name=region_name,
         )
     except KeyError as e:
         raise KeyError(f"Malformed json credentials file.") from e
